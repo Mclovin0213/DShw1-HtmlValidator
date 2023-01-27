@@ -247,40 +247,23 @@ public class HtmlValidatorTest {
 	}
 
 	/**
-	 * Add your own test to test your removeAll method
-	 * Add your own comment here:
+	 * This myRemoveAllTest1() tests the removeAll method
 	 */
 	@Test
 	public void myRemoveAllTest1(){
+        HtmlValidator testValidator = new HtmlValidator();
+        testValidator.addTag(new HtmlTag("p", true));
+        testValidator.addTag(new HtmlTag("p", true));
+        testValidator.addTag(new HtmlTag("p", true));
+        testValidator.addTag(new HtmlTag("img", true));
+        testValidator.addTag(new HtmlTag("html", true));
 
-	}
+        HtmlValidator correctOutput = new HtmlValidator();
+        correctOutput.addTag(new HtmlTag("img", true));
+        correctOutput.addTag(new HtmlTag("html", true));
 
-	/**
-	 * Add your own test to test your removeAll method
-	 * Add your own comment here:
-	 */
-	@Test
-	public void myRemoveAllTest2(){
+        testValidator.removeAll("p");
 
-	}
-
-	/**
-	 * Add your own test to test your removeAll method
-	 * Add your own comment here:
-	 */
-	@Test
-	public void myRemoveAllTest3(){
-
-	}
-
-    /**
-     * Add your own test to test your removeAll method
-     * Add your own comment here:
-     */
-    @Test
-    public void myRemoveAllTest4(){
-
+        Assert.assertEquals(correctOutput.tags, testValidator.tags);
     }
-
-    //FEEL FREE TO ADD MORE TESTS HERE
 }

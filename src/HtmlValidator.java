@@ -8,10 +8,13 @@ import java.util.*;
 public class HtmlValidator {
     Queue<HtmlTag> tags;
 
+    // Constructs an HtmlValidator, and initializes an empty queue of HtmlTags
     public HtmlValidator () {
         tags = new LinkedList<>();
     }
 
+    // Constructs an HtmlValidator, and initializes the queue with a
+    // given queue of HtmlTags
     public HtmlValidator(Queue<HtmlTag> tags) {
         if (tags == null) {
             throw new IllegalArgumentException();
@@ -19,26 +22,30 @@ public class HtmlValidator {
         this.tags = new LinkedList<>(tags);
     }
 
+    // Adds the given tag to the HtmlValidators queue of tags
     public void addTag(HtmlTag tag) {
         tags.add(tag);
     }
 
+    // Returns all tags stored in the queue
     public Queue<HtmlTag> getTags() {
         return tags;
     }
 
+    // Removes all tags from the queue that are equal to the given element
     public void removeAll(String element) {
         if (element == null) {
             throw new IllegalArgumentException();
         } else {
-            for (HtmlTag tag: tags) {
-                if (element.equals(tag.getElement())) {
-                    tags.remove(tag);
-                }
+            HtmlTag e = HtmlTag.parse(element);
+            while (tags.contains(e)) {
+                tags.remove(e);
             }
         }
     }
 
+    // Goes through the queue of tags validating each HtmlTag, printing out the tags in the correct
+    // way while also displaying the errors
     public void validate() {
         Stack<HtmlTag> temp = new Stack<>();
         int indentCount = 0;
@@ -72,6 +79,7 @@ public class HtmlValidator {
         }
     }
 
+    // Adds an indent to validate() method
     private static void addIndent(int count) {
         for (int i = 0; i < count; i++) {
             System.out.print("    ");
