@@ -36,12 +36,15 @@ public class HtmlValidator {
     public void removeAll(String element) {
         if (element == null) {
             throw new IllegalArgumentException();
-        } else {
-            HtmlTag e = HtmlTag.parse(element);
-            while (tags.contains(e)) {
-                tags.remove(e);
+        }
+
+        Queue<HtmlTag> finList = new LinkedList<>();
+        for (HtmlTag tag: tags) {
+            if (!tag.getElement().equalsIgnoreCase(element)) {
+                finList.add(tag);
             }
         }
+        tags = finList;
     }
 
     // Goes through the queue of tags validating each HtmlTag, printing out the tags in the correct
